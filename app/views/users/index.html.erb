@@ -1,2 +1,22 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<%#左上プロフィール%>
+<%#= render 'list', user: @user %>
+
+<%#左下book/新規作成%>
+<%= render 'books/new', book: @book %>
+
+
+<h2>Users</h2>
+<div>
+  <p>image</p>
+  <p>name</p>
+</div>
+
+
+<% @users.each do |user| %>
+  <p><%#= 画像 %></p>
+  <p><%= user.name %></p>
+  <p><%#= user.introduction %></p>
+<% end %>
+
+
+
