@@ -1,2 +1,16 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%#左上プロフィール%>
+<%#= render 'list', user: @user %>
+
+<%#左下book/新規作成%>
+<%= render 'books/new', book: @book %>
+
+<%#右側books/index%>
+<% @books.each do |book| %>
+  <%= link_to user_path(user.id) do %>
+    <%= image_tag book.user.get_profile_image(100,100) %>
+  <% end %>
+  <%= link_to book_path(book.id) do %>
+    <%= book.title %>
+  <% end %>
+  <%= book.body %><
+<% end %>
