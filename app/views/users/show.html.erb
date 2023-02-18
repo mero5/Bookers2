@@ -1,16 +1,42 @@
-<%#左上プロフィール%>
-<%#= render 'list', user: @user %>
+<%#左上プロフィール @user = User.find(params[:id])%>
+<%= render 'list', user: @user %>
 
-<%#左下book/新規作成%>
+
+
+<%#左下book/新規作成 @book = Book.new%>
+<div>
 <%= render 'books/new', book: @book %>
+</div>
 
 <%#右側books/index%>
-<% @books.each do |book| %>
-  <%= link_to user_path(user.id) do %>
-    <%= image_tag book.user.get_profile_image(100,100) %>
-  <% end %>
-  <%= link_to book_path(book.id) do %>
-    <%= book.title %>
-  <% end %>
-  <%= book.body %><
-<% end %>
+<div>
+  <h2>Books</h2>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="1"></th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+      <tr>
+        <td>
+            <%= link_to user_path(current_user.id) do %>
+              <%= image_tag book.user.get_profile_image(100,100) %>
+            <% end %>
+            <%= link_to user_path(current_user.id) do %>
+              <%= @user.name %>
+            <% end %>
+            <%= link_to book_path(book.id) do %>
+              <%= book.title %>
+            <% end %>
+            <%= book.body %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

@@ -1,23 +1,44 @@
+<%#=book/新規作成（bookのcreate）ができなったとき%>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%#左上プロフィール%>
-<%#= render 'users/list', user: @user %>
+<%= render 'users/list', user: @user %>
 
 <%#左下book/新規作成%>
 <%= render 'new', book: @book %>
 
-
-<h2>Books</h2>
 <div>
-  <p>Title</p>
-  <p>Opinion</p>
+  <h2>Books</h2>
+    <table>
+      <thead>
+        <tr>
+          <th><p>Title</p></th>
+          <th><p>Opinion</p></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td>
+              <%= link_to user_path(@user.id) do %>
+                <%= image_tag book.user.get_profile_image(100,100) %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(book.id) do %>
+                <%= book.title %>
+              <% end %>
+            </td>
+            <td><%= book.body %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 </div>
-
-
-<% @books.each do |book| %>
-  <%= link_to user_path(user.id) do %>
-    <%= image_tag book.user.get_profile_image(100,100) %>
-  <% end %>
-  <%= link_to book_path(book.id) do %>
-    <%= book.title %>
-  <% end %>
-  <p><%= book.body %></p>
-<% end %>

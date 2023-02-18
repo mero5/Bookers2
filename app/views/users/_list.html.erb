@@ -1,9 +1,14 @@
 <%#左上プロフィール%>
+<div>
 <h2>User info</h2>
-<label>Image</label>
 <%= image_tag user.get_profile_image(100,100) %>
-<label>Name</label>
-<%= user.name %>
-<label>Introduction</label>
-<%#= user.introduction %>
-<%= link_to "プロフィール編集",edit_user_path(user.id) %>
+<div>
+  <label>Name</label>
+  <%= user.name %>
+</div>
+<div>
+  <label>Introduction</label>
+  <%= user.introduction %>
+</div>
+  <%= link_to "プロフィール編集",edit_user_path(user.id) %>
+</div>
