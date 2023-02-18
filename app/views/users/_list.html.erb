@@ -10,5 +10,5 @@
   <label>Introduction</label>
   <%= user.introduction %>
 </div>
-  <%= link_to "プロフィール編集",edit_user_path(user.id) %>
+  <%= link_to "プロフィール編集",edit_user_path(current_user.id) %>
 </div>

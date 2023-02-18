@@ -1,11 +1,11 @@
 <%#=book/新規作成（bookのcreate）ができなったとき%>
 <% if @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
+      <%= @book.errors.count %> errors prohibited this obj from being saved:
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
 <% end %>
 
 <%#左上プロフィール%>
