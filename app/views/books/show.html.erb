@@ -1,14 +1,22 @@
 <%#左上プロフィール%>
-<%#= render 'users/list', user: @user %>
+<%= render 'users/list', user: @user %>
 
 <%#左下book/新規作成%>
 <%= render 'new', book: @book %>
 
 
 <h2>Book detail</h2>
-
-  <p><%= @book.title %></p>
+  <%= link_to user_path(current_user.id) do %>
+    <%= image_tag @user.get_profile_image(100,100) %>
+  <% end %>
+  <%= link_to user_path(current_user.id) do %>
+    <%= @user.name %>
+  <% end %>
+  <%= link_to book_path(@book.id) do %>
+    <p><%= @book.title %></p>
+  <% end %>
   <p><%= @book.body %></p>
+  <%= link_to "edit", edit_book_path %>
 <% if @book.user == current_user %>
   <%= link_to "destroy", books_path, method: :delete %>
 <% end %>
