@@ -1,3 +1,5 @@
+<%= flash[:notice] %>
+
 <%#左上プロフィール @user = User.find(params[:id])%>
 <%= render 'list', user: @user %>
 
@@ -23,10 +25,10 @@
       <% @books.each do |book| %>
       <tr>
         <td>
-            <%= link_to user_path(current_user.id) do %>
+            <%= link_to user_path(@user.id) do %>
               <%= image_tag book.user.get_profile_image(100,100) %>
             <% end %>
-            <%= link_to user_path(current_user.id) do %>
+            <%= link_to user_path(@user.id) do %>
               <%= @user.name %>
             <% end %>
             <%= link_to book_path(book.id) do %>

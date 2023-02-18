@@ -1,3 +1,5 @@
+<%= flash[:notice] %>
+
 <%#左上プロフィール%>
 <%= render 'users/list', user: @user %>
 
@@ -16,7 +18,9 @@
     <p><%= @book.title %></p>
   <% end %>
   <p><%= @book.body %></p>
-  <%= link_to "edit", edit_book_path %>
+  <% if @book.user == current_user %>
+    <%= link_to "edit", edit_book_path %>
+  <% end %>
 <% if @book.user == current_user %>
-  <%= link_to "destroy", books_path, method: :delete %>
+  <%= link_to "destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 <% end %>

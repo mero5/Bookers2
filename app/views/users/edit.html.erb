@@ -1,3 +1,16 @@
+<%#1 error prohibited this obj from being saved:
+Name is too short (minimum is 2 characters)%>
+<%#=user/edit（userのupdate）ができなったとき%>
+<% if @user.errors.any? %>
+      <%= @user.errors.count %> error prohibited this obj from being saved:
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+<% end %>
+
+
 <h2>User info</h2>
 <%= form_with model: @user do |f| %>
   <label>Name</label>
