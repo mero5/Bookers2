@@ -8,15 +8,29 @@
       </ul>
 <% end %>
 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>Editing Book</h1>
+      <%= form_with model: @book do |f| %>
+      <div class="form-group">
+        <label>Title</label>
+        <%= f.text_field :title %>
+      </div>
+      <div class="form-group">
+        <label>Opinion</label>
+        <%= f.text_area :body %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Update Book' %>
+      </div>
+      <% end %>
+      <%= link_to "Show", book_path(@book) %>
+       |
+      <%= link_to "Back", books_path %>
+    </div>
+  </div>
+</div>
 
-<h2>Editing Book</h2>
-<%= form_with model: @book do |f| %>
-  <label>Title</label>
-  <%= f.text_field :title %>
-  <label>Opinion</label>
-  <%= f.text_area :body %>
-<%= f.submit 'Update Book' %>
-<% end %>
 
-<%= link_to "Show", book_path(@book) %>
-<%= link_to "Back", books_path %>
+

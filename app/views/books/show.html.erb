@@ -1,26 +1,51 @@
 <%= flash[:notice] %>
 
-<%#左上プロフィール%>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%#左上プロフィール%>
 <%= render 'users/list', user: @user %>
 
 <%#左下book/新規作成%>
-<%= render 'new', book: @book %>
+<%= render 'new', book: @book_new %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(current_user.id) do %>
+                <%= image_tag @user.get_profile_image(100,100) %>
+              <% end %>
+              <br>
+              <%= link_to user_path(current_user.id) do %>
+                <%= @user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(@book.id) do %>
+                <%= @book.title %>
+              <% end %>
+            </td>
+            <td><%= @book.body %></td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Edit", edit_book_path %>
+              <% end %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
 
 
-<h2>Book detail</h2>
-  <%= link_to user_path(current_user.id) do %>
-    <%= image_tag @user.get_profile_image(100,100) %>
-  <% end %>
-  <%= link_to user_path(current_user.id) do %>
-    <%= @user.name %>
-  <% end %>
-  <%= link_to book_path(@book.id) do %>
-    <p><%= @book.title %></p>
-  <% end %>
-  <p><%= @book.body %></p>
-  <% if @book.user == current_user %>
-    <%= link_to "edit", edit_book_path %>
-  <% end %>
-<% if @book.user == current_user %>
-  <%= link_to "destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-<% end %>
+
