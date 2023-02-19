@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  #before_action :is_matching_login_user, only: [:create, :edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update]
   def index
     #左下book/新規作成
     @book = Book.new
@@ -10,7 +10,7 @@ class BooksController < ApplicationController
 
   def show
     #左下book/新規作成
-    @book = Book.new
+    @book_new = Book.new
     #左上プロフィール
     @user = current_user
     @book = Book.find(params[:id])
@@ -54,6 +54,13 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body)
   end
-
+  
+  def is_matching_login_user
+    @book = Book.find(params[:id])
+    #unless bookを投稿したuserのid == ログインしているuserのid
+    unless @book.user_id == current_user.id
+      redirect_to books_path
+    end
+  end
 
 end

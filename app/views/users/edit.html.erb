@@ -10,14 +10,25 @@ Name is too short (minimum is 2 characters)%>
       </ul>
 <% end %>
 
-
-<h2>User info</h2>
-<%= form_with model: @user do |f| %>
-  <label>Name</label>
-  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder: "名前" %>
-  <label>Image</label>
-  <%= f.file_field :profile_image, placeholder: "プロフィール", accept: "image/*" %>
-  <label>Introduction</label>
-  <%= f.text_area :introduction %>
-  <%= f.submit 'Update User' %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>User info</h2>
+      <%= form_with model: @user do |f| %>
+      <div class="form-group">
+        <label>Name</label>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder: "名前" %>
+      </div>
+      <div class="form-group">
+        <label>Image</label>
+        <%= f.file_field :profile_image, placeholder: "プロフィール", accept: "image/*" %>
+      </div>
+      <div class="form-group">
+        <label>Introduction</label>
+        <%= f.text_area :introduction %>
+      </div>
+      <%= f.submit 'Update User' %>
+      <% end %>
+    </div>
+  </div>
+</div>
