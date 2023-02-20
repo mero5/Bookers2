@@ -5,7 +5,10 @@ class BooksController < ApplicationController
     @book = Book.new
     #左上プロフィール
     @user = current_user
+    #すべてのbooks
     @books = Book.all
+    #bookのを投稿したuser
+    
   end
 
   def show
