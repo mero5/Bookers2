@@ -11,9 +11,9 @@ class BooksController < ApplicationController
   def show
     #左下book/新規作成
     @book_new = Book.new
-    #左上プロフィール
-    @user = current_user
     @book = Book.find(params[:id])
+    #左上プロフィール、bookを投稿した人
+    @user = @book.user
   end
 
   def edit
