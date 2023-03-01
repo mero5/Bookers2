@@ -4,13 +4,13 @@
   <div class="row">
     <div class="col-md-3">
       <%#左上プロフィール%>
-<%= render 'users/list', user: @user %>
+      <%= render 'users/list', user: @user %>
 
-<%#左下book/新規作成%>
-<%= render 'new', book: @book_new %>
+      <%#左下book/新規作成%>
+      <%= render 'new', book: @book_new %>
     </div>
 
-
+    <%#=右側%>
     <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
       <table class="table">
@@ -21,9 +21,9 @@
                 <%= image_tag @user.get_profile_image(100,100) %>
               <% end %>
               <br>
-              <%= link_to user_path(@user.id) do %>
-                <%= @user.name %>
-              <% end %>
+                <%= link_to user_path(@user.id) do %>
+                  <%= @user.name %>
+               <% end %>
             </td>
             <td>
               <%= link_to book_path(@book.id) do %>
@@ -32,6 +32,20 @@
             </td>
             <td><%= @book.body %></td>
             <td>
+              <% if @book.favorited_by?(current_user) %>
+                <%= link_to book_favorites_path(@book), method: :delete do %>
+                  ♥<%= @book.favorites.count %>
+                <% end %>
+              <% else %>
+                <%= link_to book_favorites_path(@book), method: :post do %>
+                  ♡<%= @book.favorites.count %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <p>コメント件数：<%= @book.book_comments.count %></p>
+            </td>
+            <td>
               <% if @book.user == current_user %>
                 <%= link_to "Edit", edit_book_path %>
               <% end %>
@@ -39,6 +53,21 @@
             <td>
               <% if @book.user == current_user %>
                 <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= @book.book_comments.each do |book_comment| %>
+                <%= image_tag book_comment.user.get_profile_image(100,100) %>
+                <%= book_comment.user.name %>
+                <%= book_comment.comment %>
+              <% end %>
+            </td>
+            <td>
+              <%= form_with model: [@book, @book_comment] do |f| %>
+                <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+                <%= f.submit "送信する" %>
               <% end %>
             </td>
           </tr>
