@@ -56,7 +56,7 @@
               <% end %>
             </td>
           </tr>
-          <%= @book.book_comments.each do |book_comment| %>
+          <% @book.book_comments.each do |book_comment| %>
             <tr>
               <td><%= image_tag book_comment.user.get_profile_image(100,100) %>
                 <br>
@@ -65,7 +65,11 @@
               <td>
                 <%= book_comment.comment %>
               </td>
-              <td></td>
+              <td>
+                <% if book_comment.user == current_user %>
+                  <%= link_to "destroy", book_book_comments_path(book_comment.book, book_comment), method: :delete %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
@@ -81,6 +85,3 @@
     </div>
   </div>
 </div>
-
-
-
