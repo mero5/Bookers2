@@ -56,23 +56,27 @@
               <% end %>
             </td>
           </tr>
-          <tr>
-            <td>
-              <%= @book.book_comments.each do |book_comment| %>
-                <%= image_tag book_comment.user.get_profile_image(100,100) %>
+          <%= @book.book_comments.each do |book_comment| %>
+            <tr>
+              <td><%= image_tag book_comment.user.get_profile_image(100,100) %>
+                <br>
                 <%= book_comment.user.name %>
+              </td>
+              <td>
                 <%= book_comment.comment %>
-              <% end %>
-            </td>
-            <td>
-              <%= form_with model: [@book, @book_comment] do |f| %>
-                <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-                <%= f.submit "送信する" %>
-              <% end %>
-            </td>
-          </tr>
+              </td>
+              <td></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
+      <div>
+        <%= form_with model: [@book, @book_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+          <br>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
 
     </div>
   </div>
