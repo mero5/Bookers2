@@ -1,0 +1,31 @@
+<table>
+  <tbody>
+    <% book.book_comments.each do |book_comment| %>
+      <tr>
+        <td>
+          <%= link_to user_path(book_comment.user) do %>
+            <%= image_tag book_comment.user.get_profile_image(100,100) %>
+            <br>
+            <%= book_comment.user.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= book_comment.comment %>
+        </td>
+        <td>
+          <% if book_comment.user == current_user %>
+            <%= link_to "destroy", book_book_comments_path(book, book_comment), method: :delete %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+          
+<div>
+  <%= form_with model: [book, book_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "w-100" %>
+    <br>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
