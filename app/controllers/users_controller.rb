@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update]
+  
   def index
     #左下book/新規作成
     @book = Book.new
@@ -45,4 +47,15 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id)
     end
   end
+  
+  def followings
+    user = User.find(params[:id])
+    @user = user.followings
+  end
+  
+  def followers
+    user = User.find(params[:id])
+    @user = user.followers
+  end
+  
 end
