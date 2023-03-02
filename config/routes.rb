@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get 'home/about' => 'homes#about', as: 'about'
   resources :users,only: [:index, :show, :edit, :update, :deatroy] do
     resource :relationship, only: [:create, :destroy]
-    get :follower, on: :member
-    get :followed, on: :member
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
   end
   resources :books,only: [:index, :show, :edit, :create, :destroy, :update] do
     resource :favorites, only: [:create, :destroy]

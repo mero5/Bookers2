@@ -11,8 +11,31 @@
       <th>introduction</th>
       <th><%= user.introduction %></th>
     </tr>
+    <tr>
+      <th>followings:
+        <%= link_to user_followings_path(user.id) do %>
+          <%= user.followings.count %>
+        <% end %>
+      </th>
+    </tr>
+    <tr>
+      <th>followers:
+      <%= link_to user_followers_path(user.id) do %>
+        <%= user.followers.count %>
+      <% end %>
+      </th>
+    </tr>
+    <tr>
+      <th><%= render "relationships/following", user: user %></th>
+      　　
+    </tr>
   </tbody>
 </table>
-<div class="row">
-  <i class="fas fa-user-cog"></i><%= link_to "プロフィール編集", edit_user_path(user.id) %>
-</div>
+
+<% if user == current_user %>
+  <div class='row'>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  </div>
+<% end %>

@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+  
   def index
     #左下book/新規作成
     @book = Book.new
@@ -9,7 +10,6 @@ class BooksController < ApplicationController
     #すべてのbooks
     @books = Book.all
     #bookのを投稿したuser
-    
   end
 
   def show
