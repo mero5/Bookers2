@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  get 'book_comments/create'
-  get 'book_comments/destroy'
   devise_for :users
   root to: 'homes#top'
   get 'home/about' => 'homes#about', as: 'about'
-  resources :users,only: [:index, :show, :edit, :update, :deatroy]
+  resources :users,only: [:index, :show, :edit, :update, :deatroy] do
+    resource :relationship, only: [:create, :destroy]
+    get :follower, on: :member
+    get :followed, on: :member
+  end
   resources :books,only: [:index, :show, :edit, :create, :destroy, :update] do
     resource :favorites, only: [:create, :destroy]
     resource :book_comments, only: [:create, :destroy]
