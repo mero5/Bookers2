@@ -27,18 +27,17 @@
       <i class="fas fa-sign-in-alt"></i><%= link_to "Log in", new_user_session_path %>
       </div>
       <% end %>
-
-      </div>
       </nav>
-
+      <% if user_signed_in? %>
+        <%= render "searches/search" %>
+      <% else %>
+      <% end %>
     </header>
+
     <main>
     <%= yield %>
     </main>
     <footer>
-      <% if user_signed_in? %>
-
-      <% else %>
       <div class="container mt-5">
         <div class="row">
           <div class="mx-auto">
@@ -46,7 +45,6 @@
           </div>
         </div>
       </div>
-      <% end %>
     </footer>
   </body>
 </html>
