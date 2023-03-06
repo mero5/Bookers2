@@ -1,34 +1,24 @@
-<%#1 error prohibited this obj from being saved:
-Name is too short (minimum is 2 characters)%>
-<%#=user/edit（userのupdate）ができなったとき%>
-<% if @user.errors.any? %>
-      <%= @user.errors.count %> error prohibited this obj from being saved:
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-<% end %>
-
-<div class="container">
-  <div class="row">
+<div class='container'>
+  <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>User info</h2>
-      <%= form_with model: @user do |f| %>
+    <h2>User info</h2>
+    <%= form_with model:@user, local:true do |f| %>
+      <%= render 'layouts/errors', obj: @user %>
       <div class="form-group">
-        <label>Name</label>
-        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder: "名前" %>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control name" %>
+      </div>
+     <div class="form-group">
+        <%= f.label :image %>
+        <%= f.file_field :profile_image, class: "form-control-file user_image", accept: 'image/*' %>
       </div>
       <div class="form-group">
-        <label>Image</label>
-        <%= f.file_field :profile_image, placeholder: "プロフィール", accept: "image/*" %>
+        <%= f.label :introduction %>
+        <%= f.text_area :introduction, class: "form-control introduction" %>
       </div>
       <div class="form-group">
-        <label>Introduction</label>
-        <%= f.text_area :introduction %>
+        <%= f.submit class: 'btn btn-secondary' %>
       </div>
-      <%= f.submit 'Update User' %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
