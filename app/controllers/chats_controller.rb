@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :reject_non_related, only: [:show]
+  
   def show
     @user = User.find(params[:id])
     rooms = current_user.user_rooms.pluck(:room_id)
@@ -16,12 +17,14 @@ class MessagesController < ApplicationController
     @chats = @room.chats
     @chat = Chat.new(room_id: @room.id)
   end
+  
   def create
     @chat = current_user.chats.new(chat_params)
     render :validater unless @chat.save
   end
 
   private
+  
   def chat_params
     params.require(:chat).permit(:message, :room_id)
   end
@@ -32,4 +35,5 @@ class MessagesController < ApplicationController
       redirect_to books_path
     end
   end
+  
 end
